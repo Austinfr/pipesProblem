@@ -66,7 +66,6 @@ def solution(fileLoca):
         for traverse in pipeMap:
             if(traverse not in visited):
                 if(pipe.isConnected(traverse)):
-                    print("pipe " + pipe.toString() + " is connected to " + traverse.toString())
                     depthFirstSearch(visited, traverse)
 
     depthFirstSearch(seenPipes, startingPipe)
@@ -78,4 +77,4 @@ def solution(fileLoca):
             sortedPipes += pipe.value
     print(''.join(sorted(sortedPipes)))
 
-solution("./maintest.txt")
+solution("./input.txt")
