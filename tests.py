@@ -39,11 +39,15 @@ def test4():
             return str((self.x, self.y))
 
     ooolist = []
+    
+    def printList(list):
+        for item in list:
+            print(item)
 
-    for i in range(5):
-        for j in range(5):
+    for i in range(2):
+        for j in range(2):
             ooolist.append(ooo(i, j))
 
     
 
-test4()
+test2()

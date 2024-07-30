@@ -14,65 +14,32 @@ def solution(fileLoca):
         def pointsTo(self):
             match self.value:
                 case '=':
-                    return ((self.x - 1, self.y),(self.x + 1, self.y))
+                    return {(self.x - 1, self.y),(self.x + 1, self.y)}
                 case '║':
-                    return ((self.x, self.y - 1),(self.x, self.y + 1))
+                    return {(self.x, self.y - 1),(self.x, self.y + 1)}
                 case '╔':
-                    return ((self.x + 1, self.y),(self.x, self.y - 1))
+                    return {(self.x + 1, self.y),(self.x, self.y - 1)}
                 case '╗':
-                    return ((self.x - 1, self.y),(self.x, self.y - 1))
+                    return {(self.x - 1, self.y),(self.x, self.y - 1)}
                 case '╚':
-                    return ((self.x + 1, self.y),(self.x, self.y + 1))
+                    return {(self.x + 1, self.y),(self.x, self.y + 1)}
                 case '╝':
-                    return ((self.x - 1, self.y),(self.x, self.y + 1))
+                    return {(self.x - 1, self.y),(self.x, self.y + 1)}
                 case '╠':
-                    return ((self.x + 1, self.y),(self.x, self.y - 1),(self.x, self.y + 1))
+                    return {(self.x + 1, self.y),(self.x, self.y - 1),(self.x, self.y + 1)}
                 case '╣':
-                    
-                    return ()
+                    return {(self.x - 1, self.y),(self.x, self.y - 1),(self.x, self.y + 1)}
                 case '╦':
-                    return ()
+                    return {(self.x - 1, self.y),(self.x + 1, self.y),(self.x, self.y - 1)}
                 case '╩':
-                    return ((self.x + 1, self.y),(self.x, self.y - 1),(self.x, self.y + 1))
+                    return {(self.x - 1, self.y),(self.x + 1, self.y),(self.x, self.y + 1)}
                 case _:
-                    return ((self.x + 1, self.y),(self.x, self.y - 1),(self.x, self.y + 1))
+                    return {(self.x - 1, self.y),(self.x + 1, self.y),(self.x, self.y - 1),(self.x, self.y + 1)}
         
         def isConnected(self, otherPipe):
-            match otherPipe.value:
-                case '=':
-                    if((otherPipe.x - 1 == self.x or otherPipe.x + 1 == self.x) and otherPipe.y == self.y):
-                        return True
-                case '║':
-                    if((otherPipe.y -1 == self.y or otherPipe.y + 1 == self.y) and otherPipe.x == self.x):
-                        return True
-                case '╔':
-                    if((otherPipe.y - 1 == self.y and otherPipe.x == self.x) or (otherPipe.x + 1 == self.x and otherPipe.y == self.y)):
-                        return True
-                case '╗':
-                    if((otherPipe.y - 1 == self.y and otherPipe.x == self.x) or (otherPipe.x - 1 == self.x and otherPipe.y == self.y)):
-                        return True
-                case '╚':
-                    if((otherPipe.y + 1 == self.y and otherPipe.x == self.x) or (otherPipe.x + 1 == self.x and otherPipe.y == self.y)):
-                        return True
-                case '╝':
-                    if((otherPipe.y + 1 == self.y and otherPipe.x == self.x) or (otherPipe.x - 1 == self.x and otherPipe.y == self.y)):
-                        return True
-                case '╠':
-                    if(((otherPipe.y + 1 == self.y or otherPipe.y - 1 == self.y) and otherPipe.x == self.x) or (otherPipe.x + 1 == self.x and otherPipe.y == self.y)):
-                        return True
-                case '╣':
-                    if(((otherPipe.y + 1 == self.y or otherPipe.y - 1 == self.y) and otherPipe.x == self.x) or (otherPipe.x - 1 == self.x and otherPipe.y == self.y)):
-                        return True
-                case '╦':
-                    if((otherPipe.y - 1 == self.y and otherPipe.x == self.x) or ((otherPipe.x - 1 == self.x or otherPipe.x + 1 == self.x) and otherPipe.y == self.y)):
-                        return True
-                case '╩':
-                    if((otherPipe.y + 1 == self.y and otherPipe.x == self.x) or ((otherPipe.x - 1 == self.x or otherPipe.x + 1 == self.x) and otherPipe.y == self.y)):
-                        return True
-                case _:
-                    if(((otherPipe.y + 1 == self.y or otherPipe.y - 1 == self.y) and otherPipe.x == self.x) or ((otherPipe.x + 1 == self.x or otherPipe.x - 1 == self.x) and otherPipe.y == self.y)):
-                        return True
-            return False
+            return (self.pointsTo().issuperset({(otherPipe.x, otherPipe.y)})) and (otherPipe.pointsTo().issuperset({(self.x, self.y)}))
+            
+
         def toString(self):
             return "{" + self.value + "," + str(self.x) + "," + str(self.y) + "}"
 
